@@ -18,18 +18,23 @@ CREATE TABLE "public"."users" (
 );
 
 CREATE TABLE "public"."items" (
-   "id" serial primary key,
-   "title" text not null,
-   "imageurl" text DEFAULT null,
-   "description" text not null,
-   "ownerid" integer REFERENCES users(id),
-   "borrowerid" integer REFERENCES users(id)
+  "id" serial primary key,
+  "title" text not null,
+  "imageurl" text DEFAULT null,
+  "description" text not null,
+  "created" timestamp with time zone DEFAULT NOW(),
+  "ownerid" integer REFERENCES users(id)
+    ON DELETE CASCADE,
+  "borrowerid" integer REFERENCES users(id)
+    ON DELETE SET NULL
 );
 
 CREATE TABLE "public"."itemtags" (
- "itemid" integer references items (id),
- "tagid" integer references tags (id),
- unique (itemid, tagid)
+  "itemid" integer references items (id)
+    ON DELETE CASCADE,
+  "tagid" integer references tags (id)
+    ON DELETE NO ACTION,
+  unique (itemid, tagid)
 );
 
 INSERT INTO tags (title)
@@ -68,5 +73,4 @@ VALUES (
         'Hit them nails down!'
     )
 ;
-
 

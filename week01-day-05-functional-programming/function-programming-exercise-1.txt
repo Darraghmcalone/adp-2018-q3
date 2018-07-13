@@ -1,0 +1,5 @@
+// A function used as an input to another function:
+const function multiply(input){
+
+}
+A function created as an output from another function
