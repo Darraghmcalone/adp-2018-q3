@@ -29,7 +29,7 @@ app.get('/quotes', (request, response) => {
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
-app.use((request, response, next) => {
+function diyLogger(request, response, next) {
     const startDate = new Date();
     const startTime = startDate.getTime();
     const { url, method } = request;
@@ -43,4 +43,6 @@ app.use((request, response, next) => {
         console.log(`${method} ${url} ${statusCode} ${timeDelta}ms`);
     });
     next();
-});
+}
+
+app.use(diyLogger);
