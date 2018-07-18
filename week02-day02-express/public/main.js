@@ -5,6 +5,7 @@ function appendQuote(quote) {
     const quoteHtml = `
         <li>
             <strong>${quote.name}</strong>: ${quote.text}
+            <button name="${quote.name}">delete</button>
         </li>
     `;
 
@@ -12,7 +13,7 @@ function appendQuote(quote) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const getQuotesButtonElement = document.getElementById('quotes');
+    const getQuotesButtonElement = document.getElementById('get-quotes');
     const createQuoteFormElement = document.getElementById('create-quote');
     const quotesListElement = document.getElementById('quotes-list');
 
@@ -25,21 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    quotesListElement.addEventListener('click', (event) => {
-        const { clickedElement } = event;
-
-        if (clickedElement.tagName === 'BUTTON') {
-            const name = clickedElement.getAttribute('name');
-
-            fetch(`/quotes/${name}`, {
-                method: 'DELETE',
-            }).then(() => {
-                const liElement = clickedElement.parentNode;
-                liElement.parentNode.removeChild(liElement);
-            });
-        }
-    });
-    
     createQuoteFormElement.addEventListener('submit', (event) => {
         console.log('create quote: event:', event);
         const name = event.target.name.value;
@@ -68,5 +54,20 @@ document.addEventListener('DOMContentLoaded', () => {
         ).catch(
             error => console.error(`Fetch Error =\n`, error)
         );
+    });
+
+    quotesListElement.addEventListener('click', (event) => {
+        const clickedElement = event.target;
+
+        if (clickedElement.tagName === 'BUTTON') {
+            const name = clickedElement.getAttribute('name');
+
+            fetch(`/quotes/${name}`, {
+                method: 'DELETE',
+            }).then(() => {
+                const liElement = clickedElement.parentNode;
+                liElement.parentNode.removeChild(liElement);
+            });
+        }
     });
 });
