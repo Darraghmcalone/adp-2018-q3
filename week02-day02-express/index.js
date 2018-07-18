@@ -1,8 +1,8 @@
-const bodyParser = require('body-parser');
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 3300;
-const quotes = [
+let quotes = [
     {
         name: 'Fred Brooks',
         text: 'Nine people can’t make a baby in a month.',
@@ -17,57 +17,11 @@ const quotes = [
     },
 ];
 
-app.use((request, response, next) => {
-    console.log(`RECEIVED ${request.method} ${request.path}`);
-    next();
-});
-
-app.use(express.static('public'));
-
-
-app.get('/quotes', (request, response) => {
-    response.send(quotes);
-});
-app.get('/quotes/:name', function (request, response) {
-    response.send(request.params.name);
-});
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-});
 function diyLogger(request, response, next) {
     const startDate = new Date();
     const startTime = startDate.getTime();
     const { url, method } = request;
     const { statusCode } = response;
-
-    app.get('/quotes/:name', (request, response) => {
-        const { name } = request.params;
-        const matchedQuote = quotes.find((quote) => {
-            return name === quote.name;
-        });
-    
-        if (!matchedQuote) {
-            response.status(404).json('That person isn\'t quote-worthy.');
-        } else {
-            response.json(matchedQuote.text);
-        }
-    });
-
-
-
-    app.post('/quotes', bodyParser.json(), function(request, response) {
-        const newQuote = request.body;
-        // Add your new quote to the quotes array
-        // Then send back a 201 status
-        // And also send the new quote as JSON in the response
-      });
-
-      document.getElementById("create-quote").addEventListener("submit", myFunction);
-
-      function myFunction() {
-          alert("The form was submitted");
-      }
-
 
     response.on('finish', () => {
         const finishDate = new Date();
@@ -80,3 +34,44 @@ function diyLogger(request, response, next) {
 }
 
 app.use(diyLogger);
+
+app.use(express.static('public'));
+
+app
+    .route('/quotes')
+    .get((request, response) => {
+        response.send(quotes);
+    })
+    .post(bodyParser.json(), (request, response) => {
+        const newQuote = request.body;
+        // Add your new quote to the quotes array
+        quotes.push(newQuote);
+        // Then send back a 201 status
+        // And also send the new quote as JSON in the response
+        response.status(201).json(newQuote);
+    });
+
+app
+    .route('/quotes/:name')
+    .get((request, response) => {
+        const { name } = request.params;
+        const matchedQuote = quotes.find((quote) => name === quote.name);
+
+        if (!matchedQuote) {
+            response.status(404).json('That person isn\'t quote-worthy.');
+        } else {
+            response.json(matchedQuote.text);
+        }
+    })
+    .delete((request, response) => {
+        // Retrieve the name from the request
+        const { name } = request.params;
+        // Remove the quote from the quotes array
+        quotes = quotes.filter((quote) => quote.name !== name);
+        // Send back the 200 status with the response
+        response.status(200).json(quotes);
+    });
+
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+});
