@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = 3300;
+const PORT = process.env.PORT || 3300;
 const quotes = [
     {
         name: 'Fred Brooks',
