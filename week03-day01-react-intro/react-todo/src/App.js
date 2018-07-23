@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+const ToDo = (original, todo) => {}
+return <li>{original}. {todo}</li>
 
 class App extends Component {
   render() {
     const todos = ["Learn React", "Compontent"];
 
     return (
-        <ul>
-        {todos.map((todo, i) => <li key={i}>{todo}</li>)}
+      <div >
+        <ul className="todo-list">
+        {todos.map((todo, i) => <ToDo key={i}>{todo}</ToDo>)}
         </ul>
+        </div>
     );
   }
 }
