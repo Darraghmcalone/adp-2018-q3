@@ -4,37 +4,51 @@ import { ToDo } from './components/ToDo';
 import { ToDoCount } from './components/ToDoCount';
 import { ClearButton } from './components/ClearButton';
 
-
-
-
 class App extends Component {
- render() {
+  constructor() {
+    super();
+    this.state = {
+      todos: [
+        { id: 0, title: 'Learn React', complete: false },
+        { id: 1, title: 'Conquer the world', complete: false },
+        { id: 2, title: 'Have a little rest', complete: false }
+      ],
+      lastId: 0
+    };
+  }
 
-   const todos = [
-     { id: 0, title: 'Learn React', complete: false },
-     { id: 1, title: 'Learn Redux', complete: false },
-     { id: 2, title: 'Learn SQL', complete: false }
-   ];
+  toggleComplete(item) {
+    const todos = this.state.todos.map((todo) => {
+      if (todo.id === item.id) {
+        todo.complete = !todo.complete;
+      }
+      return todo;
+    });
 
-   return <div>
-     <h1>So Much To Do</h1>
-     <div className="todo-list">
-       <ul>
-         {todos.map((todo, index) =>
-           <ToDo key={todo.id} todo={todo.title} ordinal={index + 1}></ToDo>
-         )}
+    this.setState({ todos });
+  }
 
-       </ul>
-
-       <div className="todo-admin">
-         <ToDoCount number={todos.length} />
-         <ClearButton />
-       </div>
-
-     </div>
-   </div>;
-
- }
+  render() {
+    return (
+      <div>
+        <div className="todo-list">
+          <h1>So much to do</h1>
+          <ul>
+            {this.state.todos.map((todo, index) =>
+              <ToDo
+                key={todo.id}
+                todo={todo}
+                ordinal={index + 1}
+                toggleComplete={() => this.toggleComplete(todo)}></ToDo>)}
+          </ul>
+          <div className="todo-admin">
+            <ToDoCount number={this.state.todos.length}></ToDoCount>
+            <ClearButton removeCompleted=""></ClearButton>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
