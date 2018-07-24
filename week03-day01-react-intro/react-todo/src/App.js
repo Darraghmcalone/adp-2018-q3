@@ -34,6 +34,18 @@ class App extends Component {
     this.setState({ todos });
   }
 
+  removeCompleted() {
+    const todos = this.state.todos.filter((todo) => !todo.complete);
+
+    this.setState({ todos });
+  }
+
+  hasCompleted() {
+    const completedTodos = this.state.todos.filter((todo) => todo.complete);
+
+    return completedTodos.length > 0;
+  }
+
   render() {
     return (
       <div>
@@ -50,7 +62,9 @@ class App extends Component {
           </ul>
           <div className="todo-admin">
             <ToDoCount number={this.state.todos.length}></ToDoCount>
-            <ClearButton removeCompleted=""></ClearButton>
+            {this.hasCompleted() &&
+              <ClearButton removeCompleted={this.removeCompleted.bind(this)}></ClearButton>
+            }
           </div>
         </div>
       </div>
