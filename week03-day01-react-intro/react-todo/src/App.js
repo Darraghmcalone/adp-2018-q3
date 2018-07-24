@@ -19,6 +19,11 @@ class App extends Component {
     this.toDoInput = React.createRef();
   }
 
+
+  componentDidMount() {
+    this.toDoInput.current.focus();
+  }
+  
   toggleComplete(item) {
     const todos = this.state.todos.map((todo) => {
       if (todo.id === item.id) {
