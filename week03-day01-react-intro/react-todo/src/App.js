@@ -28,6 +28,12 @@ class App extends Component {
     this.setState({ todos });
   }
 
+  removeToDo(item) {
+    const todos = this.state.todos.filter((todo) => todo.id !== item.id);
+
+    this.setState({ todos });
+  }
+
   render() {
     return (
       <div>
@@ -39,7 +45,8 @@ class App extends Component {
                 key={todo.id}
                 todo={todo}
                 ordinal={index + 1}
-                toggleComplete={() => this.toggleComplete(todo)}></ToDo>)}
+                toggleComplete={() => this.toggleComplete(todo)}
+                removeToDo={() => this.removeToDo(todo)}></ToDo>)}
           </ul>
           <div className="todo-admin">
             <ToDoCount number={this.state.todos.length}></ToDoCount>

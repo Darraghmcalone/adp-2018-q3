@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const ToDo = ({ ordinal, todo, toggleComplete }) => {
+export const ToDo = ({ ordinal, todo, toggleComplete, removeToDo }) => {
     return <li>
         {ordinal}. {todo.title}
         <input
             type="checkbox"
             id={todo.id}
             checked={todo.complete}
-            onClick={toggleComplete} />
+            onChange={toggleComplete} />
         <label htmlFor={todo.id} />
-        <button>
+        <button onClick={removeToDo}>
             <i className="fa fa-trash" />
         </button>
     </li>;
@@ -23,5 +23,6 @@ ToDo.propTypes = {
         title: PropTypes.string.isRequired,
         complete: PropTypes.bool.isRequired
     }),
-    toggleComplete: PropTypes.func.isRequired
+    toggleComplete: PropTypes.func.isRequired,
+    removeToDo: PropTypes.func.isRequired
 };
