@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import './App.css';
+import {ToDo} from './components/Todo';
 
-const ToDo = (original, todo) => {}
-return <li>{original}. {todo}</li>
+const ToDo = ({ ordinal, todo }) => {
+  return <li>{ordinal}. {todo}</li>;
+};
 
 class App extends Component {
   render() {
-    const todos = ["Learn React", "Compontent"];
+    const todos = ['Learn React'];
 
     return (
-      <div >
-        <ul className="todo-list">
-        {todos.map((todo, i) => <ToDo key={i}>{todo}</ToDo>)}
-        </ul>
+      <div>
+        <h1>Todos</h1>
+        <div className="todo-list">
+          <ul>
+            {todos.map((todo, index) => <ToDo key={index} todo={todo} ordinal={index + 1}></ToDo>)}
+          </ul>
         </div>
+      </div>
     );
   }
 }
