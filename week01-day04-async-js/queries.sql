@@ -66,7 +66,7 @@ SELECT * from tags
 
 SELECT  tags.title as Tag
 FROM    items, itemtags, tags
-WHERE   items.id = '2'
+WHERE   items.id = '1'
 AND     itemtags.itemid = items.id
 AND     tags.id = itemtags.tagid;
 
