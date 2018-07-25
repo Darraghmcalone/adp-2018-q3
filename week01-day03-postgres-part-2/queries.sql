@@ -2,20 +2,20 @@
 
 -- Insert a user
 INSERT into users(email, fullname, bio)
-VALUES (fred@red.com, fredo, big dawg)
+VALUES ('darraghmcalone@hotmail.co.uk', 'Darragh', 'App developer')
 
 -- Insert a tag
 INSERT into tags (title)
 
-VALUES ('example title')
+VALUES ('Kitchen Items');
 
 -- Insert an item with tags
 
-INSERT INTO items (title, imageurl, description, )
+INSERT INTO items (title, imageurl, description)
 VALUES (
-        'Example title',
-        'Example imageurl',
-        'Example desxription'
+        'Lawnmower',
+        'https://www.google.co.uk/search?q=lawnmower&source=lnms&tbm=isch&sa=X&ved=0ahUKEwja1I2W463cAhUMDsAKHVcRArUQ_AUICygC&biw=1442&bih=694#imgrc=-szObNkHw5YvMM:',
+        'Very quick Lawnmower, will cutt your grass at lightning speed!'
     );
 
 WITH upd AS (
