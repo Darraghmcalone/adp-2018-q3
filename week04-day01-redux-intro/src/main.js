@@ -2,7 +2,8 @@
 // 2. Decrement: DECREMENT_COUNTER
 import store from './redux/store'
 import { incrementCounter, decrementCounter } from './redux/modules/counter'
-import { updateName } from './redux/modules/name'
+import { updatedName } from './redux/modules/name'
+import { recordData } from './redux/modules/record_count';
 
 
 let unsubscribe = store.subscribe(() => {
@@ -55,5 +56,13 @@ nameInput.addEventListener("input", event => {
   // Dispatch an action (with the input value as an argument)
   // Update the name span text
 });
-store.dispatch(updatedName())
-console.log(updatedName())
+
+const nameInput = document.getElementById("name");
+const countedName = document.getElementById("counted-name");
+
+nameInput.addEventListener("input", event => {
+  
+    store.dispatch(updatedName())
+    countedName.innerHTML = store.getState().name.name; 
+})
+

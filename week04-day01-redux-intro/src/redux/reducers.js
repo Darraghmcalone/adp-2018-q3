@@ -1,10 +1,12 @@
 import counterReducer from './modules/counter'
 import { combineReducers } from 'redux'
-import { updateName } from './modules/name';
+import { updatedName } from './modules/name';
+import { recordCount } from './modules/record_count';
 
 
 export default combineReducers({
     counter: counterReducer,
-    name: updateName
+    name: updatedName,
+    name: recordCount
 })
 
