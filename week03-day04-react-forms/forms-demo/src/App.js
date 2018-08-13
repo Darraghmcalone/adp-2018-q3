@@ -1,6 +1,9 @@
 import React from 'react';
 import { Form, Field } from 'react-final-form';
 import { FORM_ERROR } from "final-form";
+import { withStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
 const required = value => (value ? undefined : "Required");
 
 
@@ -34,10 +37,16 @@ const App = () => (
       <form onSubmit={handleSubmit}>
         <h2>Log in</h2>
         <div>
-          <Field name="email" validate={required}>
+          <Field 
+          name="email" 
+          validate={required}
+          component={TextField}
+          component={MenuItem}
+          >
             {({ input, meta }) => (
               <div>
                 <label>Email address</label>
+                
                 <input {...input} type="text" placeholder="Email Address" />
                 {meta.error && meta.touched && <span>{meta.error}</span>}
               </div>
