@@ -1,0 +1,7 @@
+
+db.starwars.find({"homeworld.name": "Tatooine"}).count();
+
+db.starwars.find({"homeworld.name": "Tatooine", "species.name": "Human"}).count();
+
+ db.starwars.find({"height": { $gt: 170 }}).count();
+ db.starwars.find({"starships": {$gt:X-Wing}});
