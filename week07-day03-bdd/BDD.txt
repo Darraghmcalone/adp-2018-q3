@@ -1,0 +1,25 @@
+// Scenarios using BDD
+
+Title:
+
+A data consultant understand more about their students.
+
+Narrative:
+
+As a data consultant at a coding school called Rouge Academie 
+I want to know statistical data 
+so that i can understand more about my students.
+
+Scenario:
+
+Given [students have more than 3 years of experience]
+When [students have a score over 4 of satisfaction]
+And [students have 100% attendance]
+Then [do they pass every project]
+
+
+Given [students have less than 1 years of experience]
+When [students have a score less than 2 of satisfaction]
+And [students have less than 80% attendance]
+Then [do they fail the first project]
+
