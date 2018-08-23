@@ -12,6 +12,7 @@ class StudentStats {
 
         return this.data.projects[projectName];
     }
+    
     queryCohort(testExperience) {
         if (!this.data.demographics[testExperience]){
             throw new Error('Invalid range of experience');

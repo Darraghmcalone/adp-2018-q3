@@ -40,19 +40,9 @@ describe('StudentStats', () => {
             it('should throw an error', () => {
                 const testProjectName = 'does not exist';
 
-                expect(() => testStudentStats.queryProject(testProjectName)).toThrowError('Invalid project name');
-            });
-        });
 
 
-        describe('when project name specified exists', () => {
-            let testProjectData;
 
-            beforeEach(() => {
-                testProjectData = testStudentStats.queryProject('project1');
-            });
-
-            it('should provide percentage of students that passed the project', () => {
                 expect(testProjectData.passPercentage).toEqual(0.56);
             });
             it('should provide the satisfaction level of students that passed the project', () => {

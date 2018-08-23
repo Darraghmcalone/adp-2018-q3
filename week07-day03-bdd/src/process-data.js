@@ -19,7 +19,7 @@ function initProjectStats() {
         totalPass: 0,
         totalPassSatisfaction: 0,
         totalFail: 0,
-        totalFailSatisfaction: 0,
+        totalFailSatisfaction: 0, 
     };
 }
 
@@ -34,7 +34,7 @@ function compileProjectStats(projectStats) {
     }, {});
 }
 
-function calcProjects(data) {
+function calcProjects(dzata) {
     const projectStats = {};
 
     // Iterate over all students and each of their projects O(mn)
